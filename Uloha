@@ -1,0 +1,77 @@
+<?php
+
+
+
+
+
+try {
+    $connector = new PDO("mysql:host="","dbname=husty","root","");
+      $connector->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $connector->exec("set names utf8");
+
+    echo "Connected successfully";
+} catch (PDOException $e) {
+
+
+              echo "Connection failed: " . $e->getMessage();
+          }
+              $sql = "SELECT 1level FROM categories";
+              $stm =   $connector-> prepare($sql);
+              $stm->execute();
+              $level1 = $stm -> fetch();
+          
+          
+          
+              $sql2 = "SELECT 2level FROM categories";
+              $stm2 =   $connector -> prepare($sql2);
+              $stm2->execute();
+              $level2 = $stm2 -> fetch();
+              
+              
+              $sql3 = "SELECT 3level FROM categories";
+              $stm3 =   $connector -> prepare($sql3);
+              $stm3->execute();
+              $level3 = $stm3 -> fetch();
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>       
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+
+
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -3px;
+        }
+    </style> 
+    
+</head>
+<body>
+
+<div class="container">
+    <h2>Multi-Level Dropdown menu</h2>
+    <div class="dropdown">
+        <button class="btn btn-danger" type="button" data-toggle="dropdown">Multitalentovane menkô
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <?php
+                    foreach ($level1 as $level1)
+                                echo '<li><a tabindex="-1" href="#">'.$level1.'</a></li>';
+           
+            ?>
+           
+           
